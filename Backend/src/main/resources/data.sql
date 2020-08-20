@@ -16,3 +16,11 @@ insert into cinema_manager(cinema_id, manager_id) values
 (2, 3),
 (3, 3),
 (3, 4);
+
+insert into theaters(id, name, seats, deleted, cinema_id) values
+(1, 'Theater1', 10, 'false', 1),
+(2, 'Theater1', 20, 'false', 2),
+(3, 'Theater1', 20, 'false', 3),
+(4, 'Theater2', 40, 'false', 1),
+(5, 'Theater3', 60, 'false', 1),
+(6, 'Theater2', 50, 'false', 2);

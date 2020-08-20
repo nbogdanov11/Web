@@ -6,7 +6,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "cinemas")
 @Getter
@@ -33,6 +35,9 @@ public class Cinema {
             inverseJoinColumns = @JoinColumn(name = "manager_id")
     )
     List<User> managers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cinema", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Theater> theaters = new HashSet<>();
 
     public Cinema(){
         this.deleted = false;

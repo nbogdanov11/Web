@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.UserRole;
 import com.example.demo.dto.LoginDTO;
 import com.example.demo.dto.UserDTO;
+import com.example.demo.models.Cinema;
 import com.example.demo.models.User;
 import com.example.demo.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,8 +103,15 @@ public class UserService {
         return responses;
     }
 
-    public void blockUser(Long id){
+    public void blockUser(Long id) throws Exception{
         User u = userRepo.findOneById(id);
+        if(u.getRole().equals(UserRole.MANAGER)){
+            for(Cinema cinema: u.getCinemas()){
+                if(cinema.getManagers().size() == 1){
+                    throw new Exception("Menadzer ne moze da se obrise jer je jedini menadzer za bioskop " + cinema.getName() + ".");
+                }
+            }
+        }
         u.setActivated(false);
         userRepo.save(u);
     }

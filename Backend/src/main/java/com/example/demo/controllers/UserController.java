@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public void blockUser(@PathVariable Long id){
+    public void blockUser(@PathVariable Long id) throws Exception{
         userService.blockUser(id);
     }
 }

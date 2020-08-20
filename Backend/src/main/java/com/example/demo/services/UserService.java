@@ -32,7 +32,6 @@ public class UserService {
             id = allUsers.size() + 1;
         }
         user.setId(id);
-        user.setActivated(true);
         user.setBirthday(request.getBirthday());
         user.setName(request.getName());
         user.setPassword(request.getPassword());

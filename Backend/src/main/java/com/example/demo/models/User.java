@@ -3,18 +3,17 @@ package com.example.demo.models;
 import com.example.demo.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "users")
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 public class User {
 
     @Id
@@ -36,4 +35,11 @@ public class User {
     private UserRole role;
 
     private boolean activated;
+
+    @ManyToMany(mappedBy = "managers")
+    private List<Cinema> cinemas = new ArrayList<>();
+
+    public User(){
+        this.activated = true;
+    }
 }

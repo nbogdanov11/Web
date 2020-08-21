@@ -30,6 +30,9 @@ public class Film {
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Projection> projections = new ArrayList<>();
 
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Rate> rates = new ArrayList<>();
+
     public Film(){
         this.deleted = false;
     }

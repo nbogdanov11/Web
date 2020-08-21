@@ -49,4 +49,19 @@ public class ProjectionController {
     public List<ProjectionDTO> getAllProjectionsBySearch(@RequestBody ProjectionSearchDTO request) throws Exception{
         return projectionService.getAllProjectionsBySearch(request);
     }
+
+    @GetMapping("/future/paid/{id}/viewer")
+    public List<ProjectionDTO> getAllPaidProjectionsByViewerWhichAreInTheFuture(@PathVariable Long id){
+        return projectionService.getAllPaidProjectionsByViewerWhichAreInFuture(id);
+    }
+
+    @GetMapping("/past/paid/{id}/viewer")
+    public List<ProjectionDTO> getAllPaidProjectionsByViewerWhichAreInThePast(@PathVariable Long id){
+        return projectionService.getAllPaidProjectionsByViewerWhichAreInThePast(id);
+    }
+
+    @GetMapping("/reserved/{id}/viewer")
+    public List<ProjectionDTO> getAllReservedProjectionsByViewer(@PathVariable Long id){
+        return projectionService.getAllReservedProjectionsByViewer(id);
+    }
 }

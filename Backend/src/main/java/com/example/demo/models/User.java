@@ -3,6 +3,7 @@ package com.example.demo.models;
 import com.example.demo.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -41,8 +43,4 @@ public class User {
 
     @OneToMany(mappedBy = "viewer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ticket> tickets = new ArrayList<>();
-
-    public User(){
-        this.activated = true;
-    }
 }

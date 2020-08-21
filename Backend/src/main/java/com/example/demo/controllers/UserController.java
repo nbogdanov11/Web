@@ -45,6 +45,16 @@ public class UserController {
         return userService.getManagers();
     }
 
+    @GetMapping("/inactive-managers")
+    public List<UserDTO> getInactiveManagers(){
+        return userService.getInactiveManagers();
+    }
+
+    @PutMapping("/activate/{id}/manager")
+    public void activateManager(@PathVariable Long id){
+        userService.activateManager(id);
+    }
+
     @GetMapping("/viewers")
     public List<UserDTO> getViewers(){
         return userService.getViewers();

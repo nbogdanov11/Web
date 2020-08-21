@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
-import com.example.demo.dto.ProjectionDto;
+import com.example.demo.dto.ProjectionDTO;
+import com.example.demo.dto.ProjectionSearchDTO;
 import com.example.demo.models.Film;
 import com.example.demo.models.Projection;
 import com.example.demo.models.Theater;
@@ -25,7 +26,7 @@ public class ProjectionService {
     @Autowired
     private TheaterRepo theaterRepo;
 
-    public void createProjection(ProjectionDto request) throws Exception{
+    public void createProjection(ProjectionDTO request) throws Exception{
         List<Projection> allProjections = projectionRepo.findAll();
         Film film = filmRepo.findOneById(request.getFilmId());
         for(Projection p: allProjections){
@@ -64,12 +65,12 @@ public class ProjectionService {
         projectionRepo.save(projection);
     }
 
-    public List<ProjectionDto> getAllProjections(){
+    public List<ProjectionDTO> getAllProjections(){
         List<Projection> allProjections = projectionRepo.findAll();
-        List<ProjectionDto> responses = new ArrayList<>();
+        List<ProjectionDTO> responses = new ArrayList<>();
         for(Projection p: allProjections){
             if(!p.isDeleted()){
-                ProjectionDto response = new ProjectionDto();
+                ProjectionDTO response = new ProjectionDTO();
                 response.setId(p.getId());
                 response.setPrice(p.getPrice());
                 response.setTime(p.getTime());
@@ -87,12 +88,12 @@ public class ProjectionService {
         return responses;
     }
 
-    public List<ProjectionDto> getAllProjectionsByCinema(Long id){
+    public List<ProjectionDTO> getAllProjectionsByCinema(Long id){
         List<Projection> allProjections = projectionRepo.findAll();
-        List<ProjectionDto> responses = new ArrayList<>();
+        List<ProjectionDTO> responses = new ArrayList<>();
         for(Projection p: allProjections){
             if(!p.isDeleted() && p.getTheater().getCinema().getId() == id){
-                ProjectionDto response = new ProjectionDto();
+                ProjectionDTO response = new ProjectionDTO();
                 response.setId(p.getId());
                 response.setPrice(p.getPrice());
                 response.setTime(p.getTime());
@@ -110,12 +111,12 @@ public class ProjectionService {
         return responses;
     }
 
-    public List<ProjectionDto> getAllProjectionsByFilm(Long id){
+    public List<ProjectionDTO> getAllProjectionsByFilm(Long id){
         List<Projection> allProjections = projectionRepo.findAll();
-        List<ProjectionDto> responses = new ArrayList<>();
+        List<ProjectionDTO> responses = new ArrayList<>();
         for(Projection p: allProjections){
             if(!p.isDeleted() && p.getFilm().getId() == id){
-                ProjectionDto response = new ProjectionDto();
+                ProjectionDTO response = new ProjectionDTO();
                 response.setId(p.getId());
                 response.setPrice(p.getPrice());
                 response.setTime(p.getTime());
@@ -133,9 +134,9 @@ public class ProjectionService {
         return responses;
     }
 
-    public ProjectionDto getProjection(Long id){
+    public ProjectionDTO getProjection(Long id){
         Projection p = projectionRepo.findOneById(id);
-        ProjectionDto response = new ProjectionDto();
+        ProjectionDTO response = new ProjectionDTO();
         response.setId(p.getId());
         response.setPrice(p.getPrice());
         response.setTime(p.getTime());
@@ -148,5 +149,47 @@ public class ProjectionService {
         response.setFilmDuration(p.getFilm().getDuration());
         response.setFilmGenre(p.getFilm().getGenre());
         return response;
+    }
+
+    public List<ProjectionDTO> getAllProjectionsBySearch(ProjectionSearchDTO request) throws Exception{
+        List<Projection> allProjections = projectionRepo.findAll();
+        List<Projection> searchedByFilmName = new ArrayList<>();
+        List<Projection> searchedByFilmNameAndCinemaName = new ArrayList<>();
+        List<Projection> searchedByFilmNameAndCinemaNameAndGenre = new ArrayList<>();
+
+        for(Projection p: allProjections){
+            if(!p.isDeleted() && p.getFilm().getName().toLowerCase().contains(request.getFilmName().toLowerCase())){
+                searchedByFilmName.add(p);
+            }
+        }
+        for(Projection p: searchedByFilmName){
+            if(p.getTheater().getCinema().getName().toLowerCase().contains(request.getCinemaName().toLowerCase())){
+                searchedByFilmNameAndCinemaName.add(p);
+            }
+        }
+
+        for(Projection p: searchedByFilmNameAndCinemaName){
+            if(p.getFilm().getGenre().contains(request.getGenre().toUpperCase())){
+                searchedByFilmNameAndCinemaNameAndGenre.add(p);
+            }
+        }
+
+        List<ProjectionDTO> responses = new ArrayList<>();
+        for(Projection p: searchedByFilmNameAndCinemaNameAndGenre){
+            ProjectionDTO response = new ProjectionDTO();
+            response.setId(p.getId());
+            response.setPrice(p.getPrice());
+            response.setTime(p.getTime());
+            response.setFreeSeats(p.getFreeSeats());
+            response.setTheaterId(p.getTheater().getId());
+            response.setTheaterName(p.getTheater().getName());
+            response.setCinemaName(p.getTheater().getCinema().getName());
+            response.setFilmId(p.getFilm().getId());
+            response.setFilmName(p.getFilm().getName());
+            response.setFilmDuration(p.getFilm().getDuration());
+            response.setFilmGenre(p.getFilm().getGenre());
+            responses.add(response);
+    }
+        return responses;
     }
 }

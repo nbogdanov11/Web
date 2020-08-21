@@ -28,6 +28,7 @@ public class UserService {
             }
         }
         User user = new User();
+        user.setActivated(true);
         long id = 1;
         if(!allUsers.isEmpty()){
             id = allUsers.size() + 1;
@@ -53,6 +54,7 @@ public class UserService {
             }
         }
         User user = new User();
+        user.setActivated(false);
         long id = 1;
         if(!allUsers.isEmpty()){
             id = allUsers.size() + 1;
@@ -173,5 +175,33 @@ public class UserService {
             responses.add(response);
         }
         return responses;
+    }
+
+    public List<UserDTO> getInactiveManagers(){
+        List<User> allUsers = userRepo.findAll();
+        List<User> activeUsers = new ArrayList<>();
+        for(User u: allUsers){
+            if(!u.isActivated() && u.getRole().equals(UserRole.MANAGER)){
+                activeUsers.add(u);
+            }
+        }
+        List<UserDTO> responses = new ArrayList<>();
+        for(User u: activeUsers){
+            UserDTO response = new UserDTO();
+            response.setBirthday(u.getBirthday());
+            response.setId(u.getId());
+            response.setName(u.getName());
+            response.setUsername(u.getSurname());
+            response.setPhone(u.getPhone());
+            response.setSurname(u.getSurname());
+            responses.add(response);
+        }
+        return responses;
+    }
+
+    public void activateManager(Long id){
+        User user = userRepo.findOneById(id);
+        user.setActivated(true);
+        userRepo.save(user);
     }
 }

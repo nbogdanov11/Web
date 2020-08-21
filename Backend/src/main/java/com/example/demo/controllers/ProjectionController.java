@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
-import com.example.demo.dto.ProjectionDto;
+import com.example.demo.dto.ProjectionDTO;
+import com.example.demo.dto.ProjectionSearchDTO;
 import com.example.demo.services.ProjectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ public class ProjectionController {
     private ProjectionService projectionService;
 
     @PostMapping
-    public void createProjection(@RequestBody ProjectionDto request) throws Exception{
+    public void createProjection(@RequestBody ProjectionDTO request) throws Exception{
         projectionService.createProjection(request);
     }
 
@@ -25,22 +26,27 @@ public class ProjectionController {
     }
 
     @GetMapping("/{id}")
-    public ProjectionDto getProjection(@PathVariable Long id){
+    public ProjectionDTO getProjection(@PathVariable Long id){
         return projectionService.getProjection(id);
     }
 
     @GetMapping
-    public List<ProjectionDto> getAllProjections(){
+    public List<ProjectionDTO> getAllProjections(){
         return projectionService.getAllProjections();
     }
 
     @GetMapping("/{id}/cinema")
-    public List<ProjectionDto> getAllProjectionsByCinema(@PathVariable Long id){
+    public List<ProjectionDTO> getAllProjectionsByCinema(@PathVariable Long id){
         return projectionService.getAllProjectionsByCinema(id);
     }
 
     @GetMapping("/{id}/film")
-    public List<ProjectionDto> getAllProjectionsByFilm(@PathVariable Long id){
+    public List<ProjectionDTO> getAllProjectionsByFilm(@PathVariable Long id){
         return projectionService.getAllProjectionsByFilm(id);
+    }
+
+    @GetMapping("/search")
+    public List<ProjectionDTO> getAllProjectionsBySearch(@RequestBody ProjectionSearchDTO request) throws Exception{
+        return projectionService.getAllProjectionsBySearch(request);
     }
 }

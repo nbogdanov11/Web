@@ -24,3 +24,13 @@ insert into theaters(id, name, seats, deleted, cinema_id) values
 (4, 'Theater2', 40, 'false', 1),
 (5, 'Theater3', 60, 'false', 1),
 (6, 'Theater2', 50, 'false', 2);
+
+insert into films(id, name, description, duration, genre, deleted) values
+(1, 'Ko to tamo peva', 'Opis1', 80, 'KOMEDIJA', 'false'),
+(2, 'Kad porastem bicu kengur', 'Opis2', 90, 'KOMEDIJA', 'false'),
+(3, 'Juzni vetar', 'Opis3', 100, 'AKCIJA', 'false'),
+(4, 'Leptirica', 'Opis4', 70, 'HOROR', 'false'),
+(5, 'Klopka', 'Opis5', 90, 'TRILER', 'false'),
+(6, 'Klopka', 'Opis6', 100, 'TRILER', 'false'),
+(7, 'Taxi', 'Opis7', 110, 'AKCIJA', 'false'),
+(8, 'Terminator', 'Opis8', 120, 'NAUCNA FANTASTIKA', 'false');

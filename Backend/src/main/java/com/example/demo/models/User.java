@@ -39,6 +39,9 @@ public class User {
     @ManyToMany(mappedBy = "managers")
     private List<Cinema> cinemas = new ArrayList<>();
 
+    @OneToMany(mappedBy = "viewer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> tickets = new ArrayList<>();
+
     public User(){
         this.activated = true;
     }

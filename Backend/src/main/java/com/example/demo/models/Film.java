@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "films")
 @Getter
@@ -24,6 +26,9 @@ public class Film {
     private String genre;
 
     private boolean deleted;
+
+    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Projection> projections = new ArrayList<>();
 
     public Film(){
         this.deleted = false;

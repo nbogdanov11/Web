@@ -37,6 +37,5 @@ public class Projection {
 
     public Projection(){
         this.deleted = false;
-        this.freeSeats = this.theater.getSeats();
     }
 }

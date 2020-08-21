@@ -7,7 +7,6 @@ import com.example.demo.models.Theater;
 import com.example.demo.repos.FilmRepo;
 import com.example.demo.repos.ProjectionRepo;
 import com.example.demo.repos.TheaterRepo;
-import com.example.demo.repos.TicketRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +48,7 @@ public class ProjectionService {
         projection.setTime(request.getTime());
         projection.setPrice(request.getPrice());
         Theater theater = theaterRepo.findOneById(request.getTheaterId());
+        projection.setFreeSeats(theater.getSeats());
         projection.setTheater(theater);
         projection.setFilm(film);
         Projection saved = projectionRepo.save(projection);

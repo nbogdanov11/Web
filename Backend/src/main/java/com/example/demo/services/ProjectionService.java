@@ -7,10 +7,7 @@ import com.example.demo.models.Film;
 import com.example.demo.models.Projection;
 import com.example.demo.models.Theater;
 import com.example.demo.models.Ticket;
-import com.example.demo.repos.FilmRepo;
-import com.example.demo.repos.ProjectionRepo;
-import com.example.demo.repos.TheaterRepo;
-import com.example.demo.repos.TicketRepo;
+import com.example.demo.repos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +31,9 @@ public class ProjectionService {
 
     @Autowired
     private TheaterRepo theaterRepo;
+
+    @Autowired
+    private RateRepo rateRepo;
 
     public void createProjection(ProjectionDTO request) throws Exception{
         List<Projection> allProjections = projectionRepo.findAll();
@@ -276,6 +276,23 @@ public class ProjectionService {
                 response.setFilmName(p.getFilm().getName());
                 response.setFilmDuration(p.getFilm().getDuration());
                 response.setFilmGenre(p.getFilm().getGenre());
+                responses.add(response);
+            }
+        }
+        return responses;
+    }
+
+    public List<ProjectionDTO> getAllFilmsWhichCanBeRatedByViewer(Long id){
+        List<Projection> projections = projectionRepo.findAllByDeletedAndTicket_Viewer_IdAndTicket_Status(false, id, TicketStatus.PAID);
+        List<ProjectionDTO> responses = new ArrayList<>();
+        LocalDateTime now = now();
+        for(Projection p: projections){
+            if(p.getTime().isBefore(now) && rateRepo.findOneByViewer_IdAndFilm_Id(id, p.getFilm().getId()) == null){
+                ProjectionDTO response = new ProjectionDTO();
+                response.setFilmId(p.getFilm().getId());
+                response.setFilmDuration(p.getFilm().getDuration());
+                response.setFilmGenre(p.getFilm().getGenre());
+                response.setFilmName(p.getFilm().getName());
                 responses.add(response);
             }
         }

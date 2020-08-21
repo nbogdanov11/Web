@@ -60,7 +60,7 @@ public class UserService {
             id = allUsers.size() + 1;
         }
         user.setId(id);
-        user.setActivated(true);
+        user.setActivated(false);
         user.setBirthday(request.getBirthday());
         user.setName(request.getName());
         user.setPassword(request.getPassword());
@@ -130,6 +130,7 @@ public class UserService {
         response.setUsername(u.getSurname());
         response.setPhone(u.getPhone());
         response.setSurname(u.getSurname());
+        response.setRole(u.getRole());
         return response;
     }
 

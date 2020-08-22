@@ -1,0 +1,62 @@
+<div class="header">
+  <h3 class="title1" style="font-variant: small-caps;">Dobrodošli!</h3>
+    <form class="login-form" nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Unesite korisničko ime!">
+            <nz-input-group nzPrefixIcon="user">
+              <input formControlName="username" nz-input placeholder="Korisničko ime" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Unesite lozinku!">
+            <nz-input-group nzPrefixIcon="lock">
+              <input formControlName="password" nz-input type="password" placeholder="Lozinka" />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <button nz-button nzType="default" nzGhost [disabled]="!validateForm.valid">Uloguj se</button>
+          </nz-form-control>
+        </nz-form-item>
+    </form>
+</div>
+<div class="content">
+  <div class="signup">
+    <h2 class="title2">Nemaš nalog?
+    <a (click)="onRegistration()" style="color:#f1f1f1">Prijavi se!</a></h2>
+  </div>
+
+  <div style="padding:30px; opacity: 0.9; width: 75%;">
+    <nz-table #nzTable [nzData]="items">
+      <thead>
+        <tr>
+          <th nzCustomFilter>Ime</th>
+          <th>Opis</th>
+          <th>Zanr</th>
+          <th>Trajanje</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of nzTable.data">
+          <td>{{ data.name }}</td>
+          <td>{{ data.description }}</td>
+          <td>{{ data.genre }}</td>
+          <td>{{ fun(data.duration) }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+  <!-- <div style="padding:30px;opacity: 0.8;">
+    <div nz-row [nzGutter]="8">
+      <li *ngFor="let item of items">
+       <div nz-col [nzSpan]="8">
+        <nz-card style="background: #f1f1f1" nzTitle="fun(item.name)">
+          <p>{{ item.name }}</p>
+        </nz-card>
+      </div>
+      </li>
+    </div>
+  </div> -->
+</div>

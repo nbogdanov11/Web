@@ -51,7 +51,7 @@ public class UserController {
     }
 
     @PutMapping("/activate/{id}/manager")
-    public void activateManager(@PathVariable Long id){
+    public void activateManager(@PathVariable Long id, @RequestBody UserDTO emptyBody){
         userService.activateManager(id);
     }
 

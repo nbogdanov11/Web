@@ -46,7 +46,7 @@ public class ProjectionController {
     }
 
     @GetMapping("/search")
-    public List<ProjectionDTO> getAllProjectionsBySearch(@RequestBody ProjectionSearchDTO request) throws Exception{
+    public List<ProjectionDTO> getAllProjectionsBySearch(ProjectionSearchDTO request) throws Exception{
         return projectionService.getAllProjectionsBySearch(request);
     }
 

@@ -21,11 +21,11 @@ public class UserService {
     public void createViewer(UserDTO request) throws Exception{
         List<User> allUsers = userRepo.findAll();
         for(User u: allUsers){
-            if(u.isActivated()){
+//            if(u.isActivated()){
                 if(u.getUsername().equals(request.getUsername())){
                     throw new Exception("U sistemu vec postoji korisnik sa tim korisnickim imenom.");
                 }
-            }
+//            }
         }
         User user = new User();
         user.setActivated(true);
@@ -47,11 +47,11 @@ public class UserService {
     public void createManager(UserDTO request) throws Exception{
         List<User> allUsers = userRepo.findAll();
         for(User u: allUsers){
-            if(u.isActivated()){
+//            if(u.isActivated()){
                 if(u.getUsername().equals(request.getUsername())){
                     throw new Exception("U sistemu vec postoji korisnik sa tim korisnickim imenom.");
                 }
-            }
+//            }
         }
         User user = new User();
         user.setActivated(false);

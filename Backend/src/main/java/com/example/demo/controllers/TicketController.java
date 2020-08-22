@@ -18,12 +18,12 @@ public class TicketController {
     }
 
     @PutMapping("/pay/{id}/projection")
-    public void payTicket(@PathVariable Long id){
+    public void payTicket(@PathVariable Long id, @RequestBody TicketDTO emptyBody){
         ticketService.payTicket(id);
     }
 
     @PutMapping("/cancel/{id}/projection")
-    public void cancelTicket(@PathVariable Long id){
+    public void cancelTicket(@PathVariable Long id, @RequestBody TicketDTO emptyBody){
         ticketService.cancelTicket(id);
     }
 }

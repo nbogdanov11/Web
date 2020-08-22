@@ -21,6 +21,7 @@ import * as AllIcons from '@ant-design/icons-angular/icons';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
+import { ProjectionsComponent } from './home/lists/projections/projections.component';
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -34,7 +35,8 @@ registerLocaleData(en);
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ProjectionsComponent
   ],
   imports: [
     BrowserModule,

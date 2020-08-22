@@ -1,5 +1,5 @@
 <div class="header">
-  <h3 class="title1" style="font-variant: small-caps;">Dobrodošli!</h3>
+  <h3 class="title1" (click)="backToFilms()" style="font-variant: small-caps; cursor: pointer;">Dobrodošli!</h3>
     <form class="login-form" nz-form [nzLayout]="'inline'" [formGroup]="validateForm" (ngSubmit)="submitForm()">
         <nz-form-item>
           <nz-form-control nzErrorTip="Unesite korisničko ime!">
@@ -28,14 +28,15 @@
     <a (click)="onRegistration()" style="color:#f1f1f1">Prijavi se!</a></h2>
   </div>
 
-  <div style="padding:30px; opacity: 0.9; width: 75%;">
-    <nz-table #nzTable [nzData]="items">
+  <div style="padding:30px; opacity: 0.9; width: 65%;">
+    <nz-table *ngIf="isFilms" #nzTable [nzData]="items">
       <thead>
         <tr>
           <th nzCustomFilter>Ime</th>
           <th>Opis</th>
           <th>Zanr</th>
           <th>Trajanje</th>
+          <!-- <th></th> -->
         </tr>
       </thead>
       <tbody>
@@ -44,6 +45,45 @@
           <td>{{ data.description }}</td>
           <td>{{ data.genre }}</td>
           <td>{{ fun(data.duration) }}</td>
+          <!-- <td>
+            <button (click)="projections(data.id)" nz-button nzType="primary">Projekcije</button>
+          </td> -->
+        </tr>
+      </tbody>
+    </nz-table>
+    <div *ngIf="isFilms">
+      <!-- <br/> -->
+      <button (click)="search()" nz-button nzType="primary">Pretraga</button>
+    </div>
+
+    <div *ngIf="isSearch" style="width: 40%;">
+      <input nz-input placeholder="Zanr" [(ngModel)]="genre" />
+      <br/>
+      <br/>
+      <input nz-input placeholder="Naziv filma" [(ngModel)]="filmName" />
+      <br/>
+      <br/>
+      <input nz-input placeholder="Naziv bioskopa" [(ngModel)]="cinemaName" />
+      <br/>
+      <br/>
+      <button (click)="finalSearch()" nz-button nzType="primary">Pretrazi</button>
+    </div>
+
+    <nz-table *ngIf="isProjections" #nzTable [nzData]="items2">
+      <thead>
+        <tr>
+          <th nzCustomFilter>Ime</th>
+          <th>Bioskop</th>
+          <th>Zanr</th>
+          <th>Vreme</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of nzTable.data">
+          <td>{{ data.filmName }}</td>
+          <td>{{ data.cinemaName }}</td>
+          <td>{{ data.filmGenre }}</td>
+          <td>{{ format(data.time) }}</td>
         </tr>
       </tbody>
     </nz-table>

@@ -1,0 +1,32 @@
+<div style="margin-top: 5%; padding:30px; opacity: 0.9; width: 90%;">
+    <nz-table #nzTable [nzData]="items">
+      <thead>
+        <tr>
+          <th nzCustomFilter>Film</th>
+          <th>Zanr</th>
+          <th>Trajanje</th>
+          <th *ngIf="!graded"></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of nzTable.data">
+            <td>{{ data.filmName }}</td>
+            <td>{{ data.filmGenre }}</td>
+            <td>{{ duration(data.filmDuration) }}</td>
+            <td *ngIf="!graded && !show">
+                <button (click)="showStars()" nz-button nzGhost nzType="primary">Oceni</button>  
+            </td>
+            <td *ngIf="show">
+              <nz-input-number [(ngModel)]="grade" [nzMin]="1" [nzMax]="5" [nzStep]="1"></nz-input-number>
+            </td>
+            <td>
+              <button *ngIf="!graded && show" (click)="rate(data.filmId)" nz-button nzGhost nzType="primary">Potvrdi</button>  
+            </td>
+            <td *ngIf="!show">
+              <button (click)="getAvgRating(data.filmId)" nz-button nzGhost nzType="primary">Prosecna ocena</button>  
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+</div>

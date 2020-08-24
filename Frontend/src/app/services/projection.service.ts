@@ -36,13 +36,13 @@ export class ProjectionService {
     return this.http.get(this.baseUrl + `/${id}/film`);
   }
 
-  public getAllPaidProjectionsByViewerWhichAreInTheFuture(id): Observable<any> {
-    return this.http.get(this.baseUrl + `/future/paid/${id}/viewer`);
-  }
+  // public getAllPaidProjectionsByViewerWhichAreInTheFuture(id): Observable<any> {
+  //   return this.http.get(this.baseUrl + `/future/paid/${id}/viewer`);
+  // }
 
-  public getAllPaidProjectionsByViewerWhichAreInThePast(id): Observable<any> {
-    return this.http.get(this.baseUrl + `/past/paid/${id}/viewer`);
-  }
+  // public getAllPaidProjectionsByViewerWhichAreInThePast(id): Observable<any> {
+  //   return this.http.get(this.baseUrl + `/past/paid/${id}/viewer`);
+  // }
 
   public getAllReservedProjectionsByViewer(id): Observable<any> {
     return this.http.get(this.baseUrl + `/reserved/${id}/viewer`);

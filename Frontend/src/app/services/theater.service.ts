@@ -31,4 +31,8 @@ export class TheaterService {
   public getAllTheatersByCinema(id): Observable<any> {
     return this.http.get(this.baseUrl + `/${id}/cinema`);
   }
+
+  public getAllTheatersByManager(id): Observable<any> {
+    return this.http.get(this.baseUrl + `/${id}/manager`);
+  }
 }

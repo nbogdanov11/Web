@@ -1,0 +1,31 @@
+<div style="margin-top: 5%; padding:30px; opacity: 0.9; width: 90%;">
+    <nz-table #nzTable [nzData]="items">
+      <thead>
+        <tr>
+          <th nzCustomFilter>Naziv</th>
+          <th>Adresa</th>
+          <th>Email</th>
+          <th>Telefon</th>
+          <th *ngIf="!manager"></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of nzTable.data">
+          <td>{{ data.name }}</td>
+          <td>{{ data.address }}</td>
+          <td>{{ data.email }}</td>
+          <td>{{ data.phone }}</td>
+          <td *ngIf="!manager">
+            <button (click)="updateCinema(data.id)" nz-button nzGhost nzType="primary">Izmeni</button>  
+          </td>
+          <td *ngIf="!manager">
+            <button (click)="deleteCinema(data.id)" nz-button nzGhost nzType="danger">Ukloni</button>  
+          </td>
+          <td *ngIf="manager">
+            <button (click)="cinemasTheaters(data.id)" nz-button nzGhost nzType="primary">Sale</button>  
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+</div>

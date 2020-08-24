@@ -1,0 +1,21 @@
+<div class="registrationForm">
+    <h2 class="title2" style="font-variant: small-caps;">Forma za kreiranje projekcije</h2>
+    <!-- <br/> -->
+    <nz-select style="margin-left: 10%;" nzShowSearch nzAllowClear nzPlaceHolder="Izaberite film" [(ngModel)]="filmId">
+        <nz-option *ngFor="let item of items1" [nzValue]="item.id" [nzLabel]="item.name"></nz-option>
+    </nz-select>
+    <br />
+    <br />
+    <nz-select style="margin-left: 10%;" nzShowSearch nzAllowClear nzPlaceHolder="Izaberite bioskop i salu" [(ngModel)]="theaterId">
+        <nz-option *ngFor="let item of items2" [nzValue]="item.id" [nzLabel]="selectTheater(item.name, item.cinemaName)"></nz-option>
+    </nz-select>
+    <br />
+    <br />
+    <nz-date-picker style="margin-left: 10%;" nzShowTime [(ngModel)]="time"></nz-date-picker>
+    <br />
+    <br />
+    <input nz-input style="margin-left: 10%; width: 25%;" placeholder="Unesite cenu" [(ngModel)]="price" />
+    <br />
+    <br />
+    <button (click)="submit()" style="margin-left: 10%;" nz-button nzGhost nzType="primary">Potvrdi</button>
+</div>

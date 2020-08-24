@@ -24,6 +24,10 @@ public class TicketDTO {
 
     private String filmDuration;
 
+    private long filmId;
+
+    private String filmGenre;
+
     private String cinemaName;
 
     private String theaterName;

@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "projections")
 @Getter
@@ -28,8 +30,8 @@ public class Projection {
     @JoinColumn(name = "theater_id")
     private Theater theater;
 
-    @OneToOne(mappedBy = "projection", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Ticket ticket;
+    @OneToMany(mappedBy = "projection", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> tickets = new ArrayList<>();
 
     private int price;
 

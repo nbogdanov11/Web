@@ -1,23 +1,76 @@
-<div style="line-height: 16.5715;">
+<div >
 <nz-layout>
     <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
       <div class="logo"></div>
       <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-        <li nz-submenu nzTitle="User" nzIcon="user">
+        
+        <!-- VIEWER -->
+        
+        <li *ngIf="viewer" (click)="getProjectionsByViewer()" nz-menu-item>
+          <i nz-icon nzType="video-camera"></i>
+          <span>Projekcije</span>
+        </li>
+
+        <li *ngIf="viewer" (click)="reservations()" nz-menu-item>
+          <i nz-icon nzType="shopping-cart"></i>
+          <span>Rezervacije</span>
+        </li>
+
+        <li *ngIf="viewer" nz-submenu nzTitle="Odgledani filmovi" nzIcon="eye">
           <ul>
-            <li nz-menu-item>Tom</li>
-            <li nz-menu-item>Bill</li>
-            <li nz-menu-item>Alex</li>
+            <li (click)="unratedFilms()" nz-menu-item>Neocenjeni</li>
+            <li (click)="ratedFilms()" nz-menu-item>Ocenjeni</li>
           </ul>
         </li>
-        <li nz-submenu nzTitle="Team" nzIcon="team">
+
+        <!-- VIEWER -->
+
+
+
+        <!-- ADMIN -->
+
+        <li *ngIf="admin" nz-submenu nzTitle="Bioskopi" nzIcon="video-camera">
           <ul>
-            <li nz-menu-item>Team 1</li>
-            <li nz-menu-item>Team 2</li>
+            <li (click)="allCinemas()" nz-menu-item>Pregled</li>
+            <li (click)="createCinema()" nz-menu-item>Dodaj novi</li>
           </ul>
         </li>
-        <li (click)="logout()" nz-menu-item>
-          <i nz-icon nzType="file"></i>
+
+        <li *ngIf="admin" nz-submenu nzTitle="Menadzeri" nzIcon="team">
+          <ul>
+            <li (click)="activeManagers()" nz-menu-item>Aktivni</li>
+            <li (click)="inactiveManagers()" nz-menu-item>Neaktivni</li>
+          </ul>
+        </li>
+
+        <li *ngIf="admin" (click)="allViewers()" nz-menu-item>
+          <i nz-icon nzType="menu"></i>
+          <span>Korisnici</span>
+        </li>
+
+        <!-- ADMIN -->
+
+        <!-- MANAGER -->
+
+        <li *ngIf="manager" (click)="managersCinemas()" nz-menu-item>
+          <i nz-icon nzType="video-camera"></i>
+          <span>Bioskopi</span>
+        </li>
+
+        <li *ngIf="manager" (click)="addProjection()" nz-menu-item>
+          <i nz-icon nzType="video-camera-add"></i>
+          <span>Dodaj projekciju</span>
+        </li>
+
+        <!-- MANAGER -->
+
+        <li (click)="profile()" nz-menu-item>
+          <i nz-icon nzType="user"></i>
+          <span>Profil</span>
+        </li>
+
+        <li style="margin-top: 10%;" (click)="logout()" nz-menu-item>
+          <i nz-icon nzType="logout"></i>
           <span>Odjavi se</span>
         </li>
       </ul>
@@ -31,7 +84,7 @@
           (click)="isCollapsed = !isCollapsed"
         ></i>
       </nz-header>
-      <nz-content style="height: 690px; background-image: url('https://cdn.hipwallpaper.com/i/5/56/nwTxJj.jpg')">
+      <nz-content style="height: 890px; background-image: url('https://cdn.hipwallpaper.com/i/5/56/nwTxJj.jpg')">
         <!-- <nz-breadcrumb>
           <nz-breadcrumb-item>User</nz-breadcrumb-item>
           <nz-breadcrumb-item>Bill</nz-breadcrumb-item>
@@ -39,6 +92,7 @@
         <div class="inner-content">
           Bill is a cat.
         </div> -->
+        <router-outlet></router-outlet>
       </nz-content>
       <!-- <nz-footer>Ant Design ©2019 Implement By Angular</nz-footer> -->
     </nz-layout>

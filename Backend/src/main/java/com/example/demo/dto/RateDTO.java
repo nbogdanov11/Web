@@ -21,7 +21,7 @@ public class RateDTO {
 
     private String filmName;
 
-    private String genre;
+    private String filmGenre;
 
     private String filmDescription;
 

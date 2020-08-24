@@ -3,8 +3,10 @@ package com.example.demo.services;
 import com.example.demo.dto.TheaterDTO;
 import com.example.demo.models.Cinema;
 import com.example.demo.models.Theater;
+import com.example.demo.models.User;
 import com.example.demo.repos.CinemaRepo;
 import com.example.demo.repos.TheaterRepo;
+import com.example.demo.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,9 @@ public class TheaterService {
 
     @Autowired
     private CinemaRepo cinemaRepo;
+
+    @Autowired
+    private UserRepo userRepo;
 
     public void createTheater(TheaterDTO request) throws Exception{
         List<Theater> allTheaters = theaterRepo.findAll();
@@ -83,6 +88,30 @@ public class TheaterService {
                 response.setCinemaId(t.getCinema().getId());
                 responses.add(response);
             }
+        }
+        return responses;
+    }
+
+    public List<TheaterDTO> getAllTheatersByManager(Long id){
+        User manager = userRepo.findOneById(id);
+        List<TheaterDTO> responses = new ArrayList<>();
+        List<Theater> allTheaters = theaterRepo.findAll();
+        List<Theater> theaters = new ArrayList<>();
+        for(Theater t: allTheaters){
+            if(!t.isDeleted()){
+                if(t.getCinema().getManagers().contains(manager)){
+                    theaters.add(t);
+                }
+            }
+        }
+        for(Theater t: theaters){
+            TheaterDTO response = new TheaterDTO();
+            response.setName(t.getName());
+            response.setSeats(t.getSeats());
+            response.setId(t.getId());
+            response.setCinemaName(t.getCinema().getName());
+            response.setCinemaId(t.getCinema().getId());
+            responses.add(response);
         }
         return responses;
     }

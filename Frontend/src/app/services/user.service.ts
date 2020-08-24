@@ -20,6 +20,10 @@ export class UserService {
     return this.http.post(this.baseUrl + '/new-manager', body);
   }
 
+  public updateUser(body): Observable<any> {
+    return this.http.put(this.baseUrl, body);
+  }
+
   public login(body): Observable<any> {
     return this.http.post(this.baseUrl + '/login', body);
   }

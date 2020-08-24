@@ -62,5 +62,4 @@ export class RegistrationComponent implements OnInit {
   getCaptcha(e: MouseEvent): void {
     e.preventDefault();
   }
-
 }

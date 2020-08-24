@@ -25,7 +25,7 @@ public class RateService {
     @Autowired
     private UserRepo userRepo;
 
-    public void rateRepo(RateDTO request) throws Exception{
+    public void rateFilm(RateDTO request) throws Exception{
         if(rateRepo.findOneByViewer_IdAndFilm_Id(request.getViewerId(), request.getFilmId()) != null){
             throw new Exception("Vec ste ocenili ovaj film.");
         }
@@ -56,7 +56,7 @@ public class RateService {
             response.setFilmDescription(r.getFilm().getDescription());
             response.setFilmDuration(r.getFilm().getDuration());
             response.setFilmId(r.getFilm().getId());
-            response.setGenre(r.getFilm().getGenre());
+            response.setFilmGenre(r.getFilm().getGenre());
             response.setRate(r.getRate());
             response.setId(r.getId());
             responses.add(response);

@@ -17,10 +17,18 @@ export class TicketService {
   }
 
   public payTicket(id,body): Observable<any> {
-    return this.http.put(this.baseUrl + `/pay/${id}/projection`, body);
+    return this.http.put(this.baseUrl + `/pay/${id}/ticket`, body);
   }
 
   public cancelTicket(id,body): Observable<any> {
-    return this.http.put(this.baseUrl + `/cancel/${id}/projection`, body);
+    return this.http.put(this.baseUrl + `/cancel/${id}/ticket`, body);
+  }
+
+  public getAllUnratedFilmsByViewer(id): Observable<any> {
+    return this.http.get(this.baseUrl + `/unrated/${id}/viewer`);
+  }
+
+  public getAllReservedTicketsByViewer(id): Observable<any> {
+    return this.http.get(this.baseUrl + `/reserved/${id}/viewer`);
   }
 }

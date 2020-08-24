@@ -1,0 +1,48 @@
+<div class="registrationForm">
+    <form nz-form [formGroup]="validateForm">
+        <h2 class="title2" style="font-variant: small-caps;">Profil</h2>
+        <br/>
+        <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">Ime</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input id="name" formControlName="name" placeholder="Ime"/>
+            <nz-form-explain *ngIf="validateForm.get('name')?.dirty && validateForm.get('name')?.errors"
+            ></nz-form-explain
+            >
+        </nz-form-control>
+        </nz-form-item>
+        
+        <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="surname">Prezime</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input id="surname" formControlName="surname" placeholder="surname" />
+            <nz-form-explain *ngIf="validateForm.get('surname')?.dirty && validateForm.get('surname')?.errors"
+            ></nz-form-explain
+            >
+        </nz-form-control>
+        </nz-form-item>
+        
+        <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username">Email</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input id="username" formControlName="username" placeholder="Email" />
+            <nz-form-explain *ngIf="validateForm.get('username')?.dirty && validateForm.get('username')?.errors"
+            ></nz-form-explain
+            >
+        </nz-form-control>
+        </nz-form-item>
+        
+        <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone">Telefon</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input formControlName="phone" id="phone" placeholder="Telefon" />
+            <nz-form-explain *ngIf="validateForm.get('phone')?.dirty && validateForm.get('phone')?.errors">
+            </nz-form-explain>
+        </nz-form-control>
+        </nz-form-item>
+
+    </form>
+    <div>
+        <button style="margin-left: 26%;" (click)="submitForm()" nz-button nzType="primary" nzGhost [disabled]="!validateForm.valid">Potvrdi</button>
+    </div>
+</div>

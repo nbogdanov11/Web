@@ -1,1 +1,38 @@
-<p>projections works!</p>
+<div style="margin-top: 5%; margin-left: 5%">
+    <div *ngIf="isSearch" style="width: 30%;">
+        <input nz-input placeholder="Zanr" [(ngModel)]="genre" />
+        <br/>
+        <br/>
+        <input nz-input placeholder="Naziv filma" [(ngModel)]="filmName" />
+        <br/>
+        <br/>
+        <input nz-input placeholder="Naziv bioskopa" [(ngModel)]="cinemaName" />
+        <br/>
+        <br/>
+        <button (click)="search()" nz-button nzType="primary">Pretrazi</button>
+    </div>
+
+  <nz-table style="opacity: 0.9; width: 90%;" *ngIf="!isSearch" #nzTable [nzData]="items">
+    <thead>
+      <tr>
+        <th nzCustomFilter>Ime</th>
+        <th>Bioskop</th>
+        <th>Zanr</th>
+        <th>Vreme</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of nzTable.data">
+        <td>{{ data.filmName }}</td>
+        <td>{{ data.cinemaName }}</td>
+        <td>{{ data.filmGenre }}</td>
+        <td>{{ format(data.time) }}</td>
+        <td>
+            <button (click)="reserve(data.id)" nz-button nzGhost nzType="primary">Rezervisi</button>  
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <button *ngIf="!isSearch" (click)="backToearch()" nz-button nzType="primary">Nova pretraga</button>
+</div>

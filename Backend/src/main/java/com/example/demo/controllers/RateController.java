@@ -21,7 +21,7 @@ public class RateController {
 
     @PostMapping
     public void rateFilm(@RequestBody RateDTO request) throws Exception{
-        rateService.rateRepo(request);
+        rateService.rateFilm(request);
     }
 
     @GetMapping("/rated-films/{id}/viewer")

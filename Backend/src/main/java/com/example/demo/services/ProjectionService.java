@@ -49,6 +49,10 @@ public class ProjectionService {
                 }
             }
         }
+        LocalDateTime now = now();
+        if(request.getTime().isBefore(now)){
+            throw new Exception("Ne mozete oznaciti datum koji je prosao.");
+        }
         Projection projection = new Projection();
         long id = 1;
         if(!allProjections.isEmpty()){
@@ -207,7 +211,19 @@ public class ProjectionService {
     }
 
     public List<ProjectionDTO> getAllReservedProjectionsByViewer(Long id){
-        List<Projection> projections = projectionRepo.findAllByDeletedAndTicket_Viewer_IdAndTicket_Status(false, id, TicketStatus.RESERVED);
+//        List<Projection> projections = projectionRepo.findAllByDeletedAndTicket_Viewer_IdAndTicket_Status(false, id, TicketStatus.RESERVED);
+        List<Projection> allProjections = projectionRepo.findAll();
+        List<Projection> projections = new ArrayList<>();
+        for(Projection p: allProjections){
+            if(!p.isDeleted()){
+                for(Ticket t: p.getTickets()){
+                    if(t.getStatus().equals(TicketStatus.RESERVED) && t.getViewer().getId() == id){
+                        projections.add(p);
+                        break;
+                    }
+                }
+            }
+        }
         LocalDateTime now = now();
         List<ProjectionDTO> responses = new ArrayList<>();
         for(Projection p: projections){
@@ -225,65 +241,75 @@ public class ProjectionService {
                 response.setFilmDuration(p.getFilm().getDuration());
                 response.setFilmGenre(p.getFilm().getGenre());
                 responses.add(response);
-            }else{
-                Ticket ticket = p.getTicket();
-                ticket.setStatus(TicketStatus.CANCELED);
-                ticketRepo.save(ticket);
             }
         }
         return responses;
     }
 
     public List<ProjectionDTO> getAllPaidProjectionsByViewerWhichAreInFuture(Long id){
-        List<Projection> projections = projectionRepo.findAllByDeletedAndTicket_Viewer_IdAndTicket_Status(false, id, TicketStatus.RESERVED);
-        LocalDateTime now = now();
-        List<ProjectionDTO> responses = new ArrayList<>();
-        for(Projection p: projections){
-            if(p.getTime().isAfter(now)){
-                ProjectionDTO response = new ProjectionDTO();
-                response.setId(p.getId());
-                response.setPrice(p.getPrice());
-                response.setTime(p.getTime());
-                response.setFreeSeats(p.getFreeSeats());
-                response.setTheaterId(p.getTheater().getId());
-                response.setTheaterName(p.getTheater().getName());
-                response.setCinemaName(p.getTheater().getCinema().getName());
-                response.setFilmId(p.getFilm().getId());
-                response.setFilmName(p.getFilm().getName());
-                response.setFilmDuration(p.getFilm().getDuration());
-                response.setFilmGenre(p.getFilm().getGenre());
-                responses.add(response);
-            }
-        }
-        return responses;
+//        List<Projection> projections = projectionRepo.findAllByDeletedAndTicket_Viewer_IdAndTicket_Status(false, id, TicketStatus.RESERVED);
+//        LocalDateTime now = now();
+//        List<ProjectionDTO> responses = new ArrayList<>();
+//        for(Projection p: projections){
+//            if(p.getTime().isAfter(now)){
+//                ProjectionDTO response = new ProjectionDTO();
+//                response.setId(p.getId());
+//                response.setPrice(p.getPrice());
+//                response.setTime(p.getTime());
+//                response.setFreeSeats(p.getFreeSeats());
+//                response.setTheaterId(p.getTheater().getId());
+//                response.setTheaterName(p.getTheater().getName());
+//                response.setCinemaName(p.getTheater().getCinema().getName());
+//                response.setFilmId(p.getFilm().getId());
+//                response.setFilmName(p.getFilm().getName());
+//                response.setFilmDuration(p.getFilm().getDuration());
+//                response.setFilmGenre(p.getFilm().getGenre());
+//                responses.add(response);
+//            }
+//        }
+//        return responses;
+        return null;
     }
 
     public List<ProjectionDTO> getAllPaidProjectionsByViewerWhichAreInThePast(Long id){
-        List<Projection> projections = projectionRepo.findAllByDeletedAndTicket_Viewer_IdAndTicket_Status(false, id, TicketStatus.RESERVED);
-        LocalDateTime now = now();
-        List<ProjectionDTO> responses = new ArrayList<>();
-        for(Projection p: projections){
-            if(p.getTime().isBefore(now)){
-                ProjectionDTO response = new ProjectionDTO();
-                response.setId(p.getId());
-                response.setPrice(p.getPrice());
-                response.setTime(p.getTime());
-                response.setFreeSeats(p.getFreeSeats());
-                response.setTheaterId(p.getTheater().getId());
-                response.setTheaterName(p.getTheater().getName());
-                response.setCinemaName(p.getTheater().getCinema().getName());
-                response.setFilmId(p.getFilm().getId());
-                response.setFilmName(p.getFilm().getName());
-                response.setFilmDuration(p.getFilm().getDuration());
-                response.setFilmGenre(p.getFilm().getGenre());
-                responses.add(response);
-            }
-        }
-        return responses;
+//        List<Projection> projections = projectionRepo.findAllByDeletedAndTicket_Viewer_IdAndTicket_Status(false, id, TicketStatus.RESERVED);
+//        LocalDateTime now = now();
+//        List<ProjectionDTO> responses = new ArrayList<>();
+//        for(Projection p: projections){
+//            if(p.getTime().isBefore(now)){
+//                ProjectionDTO response = new ProjectionDTO();
+//                response.setId(p.getId());
+//                response.setPrice(p.getPrice());
+//                response.setTime(p.getTime());
+//                response.setFreeSeats(p.getFreeSeats());
+//                response.setTheaterId(p.getTheater().getId());
+//                response.setTheaterName(p.getTheater().getName());
+//                response.setCinemaName(p.getTheater().getCinema().getName());
+//                response.setFilmId(p.getFilm().getId());
+//                response.setFilmName(p.getFilm().getName());
+//                response.setFilmDuration(p.getFilm().getDuration());
+//                response.setFilmGenre(p.getFilm().getGenre());
+//                responses.add(response);
+//            }
+//        }
+//        return responses;
+        return null;
     }
 
     public List<ProjectionDTO> getAllFilmsWhichCanBeRatedByViewer(Long id){
-        List<Projection> projections = projectionRepo.findAllByDeletedAndTicket_Viewer_IdAndTicket_Status(false, id, TicketStatus.PAID);
+//        List<Projection> projections = projectionRepo.findAllByDeletedAndTicket_Viewer_IdAndTicket_Status(false, id, TicketStatus.PAID);
+        List<Projection> allProjections = projectionRepo.findAll();
+        List<Projection> projections = new ArrayList<>();
+        for(Projection p: allProjections){
+            if(!p.isDeleted()){
+                for(Ticket t: p.getTickets()){
+                    if(t.getViewer().getId() == id && t.getStatus().equals(TicketStatus.PAID)){
+                        projections.add(p);
+                        break;
+                    }
+                }
+            }
+        }
         List<ProjectionDTO> responses = new ArrayList<>();
         LocalDateTime now = now();
         for(Projection p: projections){

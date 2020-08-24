@@ -29,6 +29,9 @@ public class CinemaService {
                 }
             }
         }
+        if(request.getManagerId() == 0){
+            throw new Exception("Morate izabrati menadzera.");
+        }
         Cinema cinema = new Cinema();
         long id = 1;
         if(!cinemas.isEmpty()){

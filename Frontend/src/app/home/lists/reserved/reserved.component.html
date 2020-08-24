@@ -1,0 +1,28 @@
+<div style="margin-top: 5%; padding:30px; opacity: 0.9; width: 90%;">
+    <nz-table #nzTable [nzData]="items">
+      <thead>
+        <tr>
+          <th nzCustomFilter>Bioskop</th>
+          <th>Film</th>
+          <th>Zanr</th>
+          <th>Vreme</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of nzTable.data">
+            <td>{{ data.filmName }}</td>
+            <td>{{ data.cinemaName }}</td>
+            <td>{{ data.filmGenre }}</td>
+            <td>{{ format(data.time) }}</td>
+            <td>
+                <button (click)="pay(data.id)" nz-button nzGhost nzType="primary">Plati</button>  
+            </td>
+            <td>
+              <button (click)="cancel(data.id)" nz-button nzGhost nzType="danger">Otkazi</button>  
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+</div>

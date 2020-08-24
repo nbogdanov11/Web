@@ -1,0 +1,26 @@
+<button (click)="createTheater()" style="margin-left: 2.2%; margin-top: 2%;" nz-button nzType="primary">Dodaj novu</button>
+
+<div style="margin-top: 1%; padding:30px; opacity: 0.9; width: 90%;">
+    <nz-table #nzTable [nzData]="items">
+      <thead>
+        <tr>
+          <th nzCustomFilter>Oznaka</th>
+          <th>Broj sedista</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of nzTable.data">
+          <td>{{ data.name }}</td>
+          <td>{{ data.seats }}</td>
+          <td>
+            <button (click)="updateTheater(data.id)" nz-button nzGhost nzType="primary">Izmeni</button>  
+          </td>
+          <td>
+            <button (click)="deleteTheater(data.id)" nz-button nzGhost nzType="danger">Ukloni</button>  
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+</div>  

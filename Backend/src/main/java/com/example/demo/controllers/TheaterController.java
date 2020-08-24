@@ -29,6 +29,11 @@ public class TheaterController {
         return theaterService.getAllTheatersByCinema(id);
     }
 
+    @GetMapping("/{id}/manager")
+    public List<TheaterDTO> getAllTheatersByManager(@PathVariable Long id){
+        return theaterService.getAllTheatersByManager(id);
+    }
+
     @GetMapping("/{id}")
     public TheaterDTO getTheater(@PathVariable Long id){
         return theaterService.getTheater(id);

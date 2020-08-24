@@ -1,0 +1,34 @@
+<div class="registrationForm">
+    <form nz-form [formGroup]="validateForm">
+        <h2 class="title2" style="font-variant: small-caps;">Forma za kreiranje bioskopske sale</h2>
+        <br/>
+        <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">Oznaka</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input id="name" formControlName="name" placeholder="Oznaka"/>
+            <nz-form-explain *ngIf="validateForm.get('name')?.dirty && validateForm.get('name')?.errors"
+            ></nz-form-explain
+            >
+        </nz-form-control>
+        </nz-form-item>
+        
+        <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="seats">Sedista</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input id="seats" formControlName="seats" placeholder="Broj sedista" />
+            <nz-form-explain *ngIf="validateForm.get('seats')?.dirty && validateForm.get('seats')?.errors"
+            ></nz-form-explain
+            >
+        </nz-form-control>
+        </nz-form-item>
+
+        <!-- <nz-form-item nz-row style="margin-bottom:8px;">
+          <nz-form-control [nzSpan]="14" [nzOffset]="6">
+            <button (click)="submitForm()" nz-button nzType="primary" nzGhost [disabled]="!validateForm.valid">Potvrdi</button>
+          </nz-form-control>
+        </nz-form-item> -->
+    </form>
+    <div>
+        <button style="margin-left: 24.8%;" (click)="submitForm()" nz-button nzType="primary" nzGhost [disabled]="!validateForm.valid">Potvrdi</button>
+    </div>
+</div>

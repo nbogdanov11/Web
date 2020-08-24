@@ -18,8 +18,8 @@ public class Ticket {
     @Id
     private long id;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "projection_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "projection_id")
     private Projection projection;
 
     @ManyToOne(fetch = FetchType.LAZY)

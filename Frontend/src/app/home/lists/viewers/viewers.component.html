@@ -1,0 +1,24 @@
+<div style="margin-top: 5%; padding:30px; opacity: 0.9; width: 90%;">
+    <nz-table #nzTable [nzData]="items">
+      <thead>
+        <tr>
+          <th nzCustomFilter>Ime</th>
+          <th>Prezime</th>
+          <th>Email</th>
+          <th>Telefon</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of nzTable.data">
+          <td>{{ data.name }}</td>
+          <td>{{ data.surname }}</td>
+          <td>{{ data.username }}</td>
+          <td>{{ data.phone }}</td>
+          <td>
+            <button (click)="deleteViewer(data.id)" nz-button nzGhost nzType="danger">Ukloni</button>  
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+</div>  

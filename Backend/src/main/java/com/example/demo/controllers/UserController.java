@@ -20,6 +20,11 @@ public class UserController {
         userService.createViewer(request);
     }
 
+    @PutMapping
+    public void updateUser(@RequestBody UserDTO request) throws Exception{
+        userService.updateUser(request);
+    }
+
     @PostMapping("/new-manager")
     public void createManager(@RequestBody UserDTO request) throws Exception{
         userService.createManager(request);

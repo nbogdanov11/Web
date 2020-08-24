@@ -9,6 +9,7 @@ import com.example.demo.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,10 @@ public class UserService {
                 }
 //            }
         }
+        LocalDate now = LocalDate.now();
+        if(request.getBirthday().isAfter(now) || request.getBirthday() == null){
+            throw new Exception("Niste selektovali validan datum.");
+        }
         User user = new User();
         user.setActivated(true);
         long id = 1;
@@ -41,6 +46,22 @@ public class UserService {
         user.setSurname(request.getSurname());
         user.setUsername(request.getUsername());
         user.setRole(UserRole.VIEWER);
+        userRepo.save(user);
+    }
+
+    public void updateUser(UserDTO request) throws Exception{
+//        List<User> allUsers = userRepo.findAll();
+//        for(User u: allUsers){
+//            if(u.isActivated()){
+//            if(u.getUsername().equals(request.getUsername())){
+//                throw new Exception("U sistemu vec postoji korisnik sa tim korisnickim imenom.");
+//            }
+//            }
+//        }
+        User user = userRepo.findOneById(request.getId());
+        user.setName(request.getName());
+        user.setPhone(request.getPhone());
+        user.setSurname(request.getSurname());
         userRepo.save(user);
     }
 
@@ -60,7 +81,6 @@ public class UserService {
             id = allUsers.size() + 1;
         }
         user.setId(id);
-        user.setActivated(false);
         user.setBirthday(request.getBirthday());
         user.setName(request.getName());
         user.setPassword(request.getPassword());
@@ -148,7 +168,7 @@ public class UserService {
             response.setBirthday(u.getBirthday());
             response.setId(u.getId());
             response.setName(u.getName());
-            response.setUsername(u.getSurname());
+            response.setUsername(u.getUsername());
             response.setPhone(u.getPhone());
             response.setSurname(u.getSurname());
             responses.add(response);

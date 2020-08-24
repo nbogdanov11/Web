@@ -1,0 +1,59 @@
+<div class="registrationForm">
+    <form nz-form [formGroup]="validateForm">
+        <h2 class="title2" style="font-variant: small-caps;">Forma za kreiranje bioskopa</h2>
+        <br/>
+        <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="name">Naziv</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input id="name" formControlName="name" placeholder="Ime"/>
+            <nz-form-explain *ngIf="validateForm.get('name')?.dirty && validateForm.get('name')?.errors"
+            ></nz-form-explain
+            >
+        </nz-form-control>
+        </nz-form-item>
+        
+        <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="surname">Adresa</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input id="address" formControlName="address" placeholder="Adresa" />
+            <nz-form-explain *ngIf="validateForm.get('address')?.dirty && validateForm.get('address')?.errors"
+            ></nz-form-explain
+            >
+        </nz-form-control>
+        </nz-form-item>
+        
+        <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phone">Telefon</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input id="phone" formControlName="phone" placeholder="Telefon" />
+            <nz-form-explain *ngIf="validateForm.get('phone')?.dirty && validateForm.get('phone')?.errors"
+            ></nz-form-explain
+            >
+        </nz-form-control>
+        </nz-form-item>
+        
+        <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email">Email</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24">
+            <input nz-input formControlName="email" id="email" placeholder="Email" />
+            <nz-form-explain *ngIf="validateForm.get('email')?.dirty && validateForm.get('email')?.errors">
+            </nz-form-explain>
+        </nz-form-control>
+        </nz-form-item>
+
+    </form>
+    <div style="margin-top: 3%; margin-left: 13.6%; height: 8%;" *ngIf="!update">
+        <label style="margin-left: 1%">Menadzer :</label>
+        <nz-select style="margin-left: 1%;" nzShowSearch nzAllowClear nzPlaceHolder="Izaberi menadzera" [(ngModel)]="manager">
+            <nz-option *ngFor="let item of items" [nzValue]="item.id" [nzLabel]="managersCredential(item.name, item.surname)"></nz-option>
+          </nz-select>
+        <!-- <br />
+        <br /> -->
+    </div>
+    <div *ngIf="!update">
+        <button style="margin-left: 24.8%;" (click)="submitForm()" nz-button nzType="primary" nzGhost [disabled]="!validateForm.valid">Potvrdi</button>
+    </div>
+    <div *ngIf="update">
+        <button style="margin-left: 26%;" (click)="submitForm()" nz-button nzType="primary" nzGhost [disabled]="!validateForm.valid">Potvrdi</button>
+    </div>
+</div>

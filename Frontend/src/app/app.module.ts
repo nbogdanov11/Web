@@ -22,6 +22,16 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { ProjectionsComponent } from './home/lists/projections/projections.component';
+import { CinemasComponent } from './home/lists/cinemas/cinemas.component';
+import { CinemaComponent } from './home/profile/cinema/cinema.component';
+import { UsersComponent } from './home/lists/users/users.component';
+import { UserComponent } from './home/profile/user/user.component';
+import { TheatersComponent } from './home/lists/theaters/theaters.component';
+import { TheaterComponent } from './home/profile/theater/theater.component';
+import { ViewersComponent } from './home/lists/viewers/viewers.component';
+import { ProjectionComponent } from './home/profile/projection/projection.component';
+import { ReservedComponent } from './home/lists/reserved/reserved.component';
+import { WatchedComponent } from './home/lists/watched/watched.component';
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -36,7 +46,17 @@ registerLocaleData(en);
     HomeComponent,
     LoginComponent,
     RegistrationComponent,
-    ProjectionsComponent
+    ProjectionsComponent,
+    CinemasComponent,
+    CinemaComponent,
+    UsersComponent,
+    UserComponent,
+    TheatersComponent,
+    TheaterComponent,
+    ViewersComponent,
+    ProjectionComponent,
+    ReservedComponent,
+    WatchedComponent
   ],
   imports: [
     BrowserModule,

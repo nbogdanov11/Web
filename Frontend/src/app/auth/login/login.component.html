@@ -28,7 +28,7 @@
     <a (click)="onRegistration()" style="color:#f1f1f1">Prijavi se!</a></h2>
   </div>
 
-  <div style="padding:30px; opacity: 0.9; width: 65%;">
+  <div style="margin-top: -2% ;padding:30px; opacity: 0.9; width: 65%;">
     <nz-table *ngIf="isFilms" #nzTable [nzData]="items">
       <thead>
         <tr>
@@ -52,8 +52,7 @@
       </tbody>
     </nz-table>
     <div *ngIf="isFilms">
-      <!-- <br/> -->
-      <button (click)="search()" nz-button nzType="primary">Pretraga</button>
+      <button style="margin-top: 1%;" (click)="search()" nz-button nzType="primary">Pretraga</button>
     </div>
 
     <div *ngIf="isSearch" style="width: 40%;">

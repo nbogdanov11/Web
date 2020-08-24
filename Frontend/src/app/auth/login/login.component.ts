@@ -30,6 +30,13 @@ export class LoginComponent implements OnInit {
       password: [null, [Validators.required]],
       remember: [true]
     });
+    this.setupData();
+    this.isFilms = true;
+    this.isProjections = false;
+    this.isSearch = false;
+  }
+
+  private setupData(): void{
     this.filmService.getFilms().subscribe(data => {
       this.items = data;
     });
@@ -37,9 +44,6 @@ export class LoginComponent implements OnInit {
     // var data2 = {name : "HARRY POTTER", age : 18};
     // this.items.push(data1);
     // this.items.push(data2);
-    this.isFilms = true;
-    this.isProjections = false;
-    this.isSearch = false;
   }
 
   submitForm(): void {
